@@ -29,7 +29,7 @@ class Agent():
 def get_actions(node) -> List[int]:
     path = []
     while node.parent is not None:
-        path.insert(node.action_to_reach)
+        path.insert(0, node.action_to_reach)
         node = node.parent
     return path
 
@@ -46,18 +46,24 @@ class BFSAgent():
         total_cost = 0
         expanded = 0
         state = self.env.get_initial_state()
-        rootNode = Node(None, state[0], None, -1, 1)
+        rootNode = Node(None, state, None, -1, 1, self.env)
         open.append(rootNode)
         while len(open) > 0:
-            node = open.pop()
-            closed.append(node)
+            node = open.pop(0)
+            closed.append(node.state_tuple)
             expanded += 1
+            print('expanded node:', node.state_tuple, '\n')
             for action, (state, cost, terminated) in env.succ(node.state_tuple).items():
-                child_node = Node(node, (state,cost,terminated), action, node.cumulative_cost, cost, env)
-                if child_node.state_tuple not in closed and child_node.state_tuple not in open:
+                child_node = Node(node, state, action, node.cumulative_cost, cost, self.env)
+                child_node.state_tuple = (child_node.state_tuple[0], node.state_tuple[1], node.state_tuple[2])
+                if child_node.state_tuple[0] == env.d1[0]:
+                    child_node.state_tuple = (child_node.state_tuple[0], True, child_node.state_tuple[2])
+                if child_node.state_tuple[0] == env.d2[0]:
+                    child_node.state_tuple = (child_node.state_tuple[0], child_node.state_tuple[1], True)
+                if child_node.state_tuple not in closed and child_node.state_tuple not in [open_node.state_tuple for open_node in open]:
                     if env.is_final_state(child_node.state_tuple):
-                        return (get_actions(child_node), child_node.cumulative_cost, expanded)
-                    if not terminated:
+                        return get_actions(child_node), child_node.cumulative_cost, expanded
+                    if not terminated and child_node.state_tuple != node.state_tuple:
                         open.append(child_node)
 
 
