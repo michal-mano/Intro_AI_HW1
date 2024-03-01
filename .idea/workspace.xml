@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef4c441c-8fb2-4862-870f-9b914dc1f106" name="Changes" comment="initial">
+    <list default="true" id="ef4c441c-8fb2-4862-870f-9b914dc1f106" name="Changes" comment="work on algorithms">
+      <change afterPath="$PROJECT_DIR$/results.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/236501_hw1.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/236501_hw1.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithms.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +35,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/t-michalmano/OneDrive - Microsoft/Documents/School/Intro_AI_HW1",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -47,7 +48,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-5a2391486177-2887949eec09-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.13763.11" />
+        <option value="bundled-python-sdk-d68999036c7f-b11f5e8da5ad-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.14475.56" />
       </set>
     </attachedChunks>
   </component>
@@ -60,7 +61,11 @@
       <option name="presentableId" value="Default" />
       <updated>1707827382634</updated>
       <workItem from="1707827392779" duration="9088000" />
-      <workItem from="1707836930911" duration="5899000" />
+      <workItem from="1707836930911" duration="102253000" />
+      <workItem from="1708413519707" duration="6269000" />
+      <workItem from="1708433190609" duration="11170000" />
+      <workItem from="1709025767794" duration="75000" />
+      <workItem from="1709025860369" duration="35000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <option name="closed" value="true" />
@@ -70,7 +75,31 @@
       <option name="project" value="LOCAL" />
       <updated>1707836864879</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="initial">
+      <option name="closed" value="true" />
+      <created>1707842979103</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1707842979103</updated>
+    </task>
+    <task id="LOCAL-00003" summary="initial">
+      <option name="closed" value="true" />
+      <created>1708433144905</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1708433144905</updated>
+    </task>
+    <task id="LOCAL-00004" summary="work on algorithms">
+      <option name="closed" value="true" />
+      <created>1708447298858</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1708447298858</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -79,7 +108,8 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="initial" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial" />
+    <MESSAGE value="work on algorithms" />
+    <option name="LAST_COMMIT_MESSAGE" value="work on algorithms" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -89,11 +119,16 @@
           <line>380</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="jupyter-line">
+          <url>notebook://C:/Users/t-michalmano/Documents/School/Intro_AI_HW1/pythonProject/236501_hw1.ipynb</url>
+          <line>411</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <condition expression="node.state_tuple == (5,True,False)" language="Python" />
+          <condition expression="current_node.state_tuple[0] == 2" language="Python" />
           <url>file://$PROJECT_DIR$/Algorithms.py</url>
           <line>55</line>
-          <option name="timeStamp" value="16" />
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

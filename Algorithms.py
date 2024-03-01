@@ -37,11 +37,14 @@ class Agent():
 
     def hmsap(self, state):
         distance_to_goals = []
-        distance_to_goals.append(self.manhattan_dist(state, self.env.d1))
-        distance_to_goals.append(self.manhattan_dist(state, self.env.d2))
+        if (state[1] == False):
+            distance_to_goals.append(self.manhattan_dist(state, self.env.d1))
+        if (state[2] == False):
+            distance_to_goals.append(self.manhattan_dist(state, self.env.d2))
         for goal in self.env.goals:
             distance_to_goals.append(self.manhattan_dist(state, goal))
         return min(distance_to_goals)
+
 
     def a_star_search(self, pop_function, env : DragonBallEnv):
         self.env = env
@@ -70,8 +73,7 @@ class Agent():
                         child_node.state_tuple = (child_node.state_tuple[0], True, child_node.state_tuple[2])
                     if child_node.state_tuple[0] == self.env.d2[0]:
                         child_node.state_tuple = (child_node.state_tuple[0], child_node.state_tuple[1], True)
-                    new_weight = (1 - self.h_weight) * child_node.cumulative_cost + self.h_weight * self.hmsap(
-                        child_node.state_tuple)
+                    new_weight = (1 - self.h_weight) * child_node.cumulative_cost + self.h_weight * self.hmsap(child_node.state_tuple)
                     if child_node.state_tuple not in [node.state_tuple for node in
                                                       close.keys()] and child_node.state_tuple not in [node.state_tuple
                                                                                                        for node in
@@ -151,16 +153,15 @@ class WeightedAStarAgent(Agent):
         return abs(state1_row - state2_row) + abs(state1_col - state2_col)
 
     def weighted_pop(self, open):
-        # node, weight = open.peekitem()
-        # node_options = [node]
-        # for key, value in open.items():
-        #     if value == weight:
-        #         node_options.append(key)
-        # lowest_state = min([node.state_tuple[0] for node in node_options])
-        # for key, value in open.items():
-        #     if key.state_tuple[0] == lowest_state:
-        #         return key, value
-        return open.peekitem()
+        node, weight = open.peekitem()
+        node_options = [node]
+        for key, value in open.items():
+            if value == weight:
+                node_options.append(key)
+        lowest_state = min([node.state_tuple[0] for node in node_options])
+        for key, value in open.items():
+            if key.state_tuple[0] == lowest_state and value == weight:
+                return key, value
 
     def search(self, env: DragonBallEnv, h_weight) -> Tuple[List[int], float, int]:
         self.h_weight = h_weight
@@ -174,14 +175,20 @@ class AStarEpsilonAgent(Agent):
     def epsilon_pop(self, open):
         focal = heapdict.heapdict()
         best_node, best_val = open.peekitem()
-        focal[best_node] = self.hmsap(best_node.state_tuple)
+        focal[best_node] = best_node.cumulative_cost
         for key, value in open.items():
             if value <= (1 + self.epsilon) * best_val:
                 focal[key] = key.cumulative_cost
-                # focal[key] = self.hmsap(key.state_tuple)
-        focal_top, focal_weight = focal.popitem()
-        weight = open.get(focal_top)
-        return focal_top, weight
+
+        focal_top, focal_weight = focal.peekitem()
+        best_options = [focal_top]
+        for key, value in focal.items():
+            if value == focal_weight:
+                best_options.append(key)
+        lowest_state = min([node.state_tuple[0] for node in best_options])
+        for key, value in focal.items():
+            if key.state_tuple[0] == lowest_state and value == focal_weight:
+                return key, open.get(key)
 
     def search(self, env: DragonBallEnv, epsilon: int) -> Tuple[List[int], float, int]:
         self.epsilon = epsilon
